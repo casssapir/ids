@@ -8,7 +8,8 @@ def generate_unique_ids(char_count, max_ids=1000):
     if max_ids <= 0:
         raise ValueError("Max IDs must be a positive number")
 
-    characters = string.ascii_letters + string.digits  # a-z, A-Z, and 0-9
+    # Adjusting the order to 0-9, A-Z, a-z for Unicode sorting
+    characters = string.digits + string.ascii_uppercase + string.ascii_lowercase
     # Use islice to generate only the required number of combinations
     sorted_ids = itertools.islice(itertools.product(characters, repeat=char_count), max_ids)
     return (''.join(combination) for combination in sorted_ids)
