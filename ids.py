@@ -1,7 +1,6 @@
 import itertools
 import string
 import argparse
-import os
 
 def generate_unique_ids(char_count, num_ids=None):
     if not 1 <= char_count <= 16:
@@ -22,18 +21,25 @@ def save_ids_to_file(ids, filename_prefix, max_ids_per_file=10000000):
     id_count = 0
 
     file = open(f"{filename_prefix}_{file_number}.txt", 'w')
+    print(f"Starting new file: {filename_prefix}_{file_number}.txt")
 
     for id in ids:
         file.write(id + '\n')
         id_count += 1
 
+        if id_count % 100000 == 0:
+            print(f"{id_count} IDs added to {filename_prefix}_{file_number}.txt")
+
         if id_count >= max_ids_per_file:
             file.close()
+            print(f"Finished writing {filename_prefix}_{file_number}.txt")
             file_number += 1
             id_count = 0
             file = open(f"{filename_prefix}_{file_number}.txt", 'w')
+            print(f"Starting new file: {filename_prefix}_{file_number}.txt")
 
     file.close()
+    print(f"Finished writing {filename_prefix}_{file_number}.txt")
 
 def main():
     parser = argparse.ArgumentParser(description="Generate a list of unique IDs.")
