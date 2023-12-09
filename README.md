@@ -16,5 +16,9 @@ tiny sequential ids for use in databases
 ### Output size
 
 Characters | Max Ids | File Size (MB)
-3 | 238,328 | 
+2 | 3,844 | 12 KB
+3 | 238,328 | 953 KB
 4 | 14,776,336 | 73.9 MB
+
+Each ID is followed by a newline character. 
+Assuming a newline character is 1 byte, each ID+newline pair takes char_count + 1 bytes.
